@@ -18,6 +18,9 @@ async function fetchData() {
         var data = getValues(fetchedData);
         var labels = getLabels(fetchedData);
         var countryName = getCountryName(fetchedData);
+        var countryIndicator = getIndicatorName(fetchedData);
+
+        document.getElementById('countryNameAndIndicator').innerHTML=countryName + " (" + countryIndicator + ")";
         renderChart(data, labels, countryName);
     }
 }
@@ -36,6 +39,18 @@ function getCountryName(data) {
     var countryName = data[1][0].country.value;
     return countryName;
 }
+
+function getIndicatorName(data) {
+    var indicatorName = data[1][0].indicator.value;
+    return indicatorName;
+}
+
+async function fetchCountryData () {
+    const baseUrl = 'https://restcountries.eu/rest/v2/alpha/';
+    const url = baseUrl + countryCode;
+    console.log('Fetching data from URL: ' + url);
+}
+
 
 function renderChart(data, labels, countryName) {
     var ctx = document.getElementById('myChart').getContext('2d');
